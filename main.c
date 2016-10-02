@@ -6,7 +6,6 @@ const char *FORMULA      = "1+3+5*(3+5)";
 const char *FILE_NAME    = "formula.txt";
 
 int main(int argc, const char * argv[]) {
-  
   write_text(FORMULA, FILE_NAME);
   FILE *file = get_file_ptr(FILE_NAME);
   Node *tree = read_expression(file);
@@ -67,13 +66,10 @@ Node* read_term(FILE *file) {
 
 Node* read_factor(FILE *file) {
   Node* ret;
-  
   // loop for skiping space
   for (;;) {
     int asciiChar = getc(file);
-    
     if (!isspace(asciiChar)) {
-      
       // return number if not '('
       if (isdigit(asciiChar)) {
         ungetc(asciiChar, file);                  // push back char to file
@@ -81,7 +77,6 @@ Node* read_factor(FILE *file) {
         
       } else if (asciiChar == '(') {
         ret = read_expression(file);
-        
         // loop for skiping space and ')' in factor
         for (;;) {
           int _asciiChar = getc(file);
